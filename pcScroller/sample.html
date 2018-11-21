@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PCScroller.js</title>
+    <style>
+
+        .scroller-container {
+            position: absolute;
+            top: 0px;
+            right: 2px;
+            width: 8px;
+            height: 100%;
+            padding-bottom: 60px;
+            box-sizing: border-box;
+        }
+
+        .scroller-container .scroller-thumb {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background: #fc1919; /* 可自定义滑块颜色 */
+            border-radius: 16px;
+            border: 1px solid #ce051e;
+        }
+
+        .wrapper {
+            width: 200px;
+            height: 400px;
+            margin: 0 auto;
+            background: #aaa;
+            overflow-y: auto;
+        }
+
+        .content .info {
+            background: #fff;
+            border-radius: 10px;
+            margin: 10px 10px;
+            padding: 10px 0px;
+            background: #eee;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <p class="info">1</p>
+            <p class="info">2</p>
+            <p class="info">3</p>
+            <p class="info">4</p>
+            <p class="info">5</p>
+            <p class="info">6</p>
+            <p class="info">7</p>
+            <p class="info">8</p>
+            <p class="info">9</p>
+            <p class="info">10</p>
+            <p class="info">1</p>
+            <p class="info">2</p>
+            <p class="info">3</p>
+            <p class="info">4</p>
+            <p class="info">5</p>
+            <p class="info">6</p>
+            <p class="info">7</p>
+            <p class="info">8</p>
+            <p class="info">9</p>
+            <p class="info">10</p>
+        </div>
+    </div>
+
+    <script src="./PCScroller.js"></script>
+    <script>
+        var MyPCScroller = new PCScroller(document.querySelector('.wrapper'))
+    </script>
+</body>
+</html>

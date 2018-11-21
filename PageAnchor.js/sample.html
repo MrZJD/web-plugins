@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>页面锚点插件</title>
+    <style>
+        html, body {
+            margin: 0;
+        }
+        .section {
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+        .section:nth-child(2n+1) {
+            background: #aaa;
+        }
+
+        .floater {
+            position: fixed;
+            bottom: 20%;
+            right: 0px;
+            background: #fff;
+        }
+
+        .floater .btn {
+            width: 100px;
+            height: 40px;
+            border:1px solid #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .floater .btn.active {
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="section home" anchor="home">home</div>
+    <div class="section section1" anchor="section1">section1</div>
+    <div class="section section2" anchor="section2">section2</div>
+    <div class="section section3" anchor="section3">section3</div>
+    <div class="section section4" anchor="section4">section4</div>
+
+    <div class="floater">
+        <div class="btn home" anchor-src="home">home</div>
+        <div class="btn section1" anchor-src="section1">section1</div>
+        <div class="btn section2" anchor-src="section2">section2</div>
+        <div class="btn section3" anchor-src="section3">section3</div>
+        <div class="btn section4" anchor-src="section4">section4</div>
+    </div>
+
+    <script src="./pageAnchor.js"></script>
+    <script>
+        var anchor = new PageAnchor(
+            document.querySelector('.floater'),
+            [].slice.call(document.querySelectorAll('div[anchor]'))
+        )
+    </script>
+</body>
+</html>

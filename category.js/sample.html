@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Category.js 分类插件</title>
+    <style>
+        .cate-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sub-cate > span {
+            display: inline-block;
+            border: 1px solid red;
+            padding: 10px 20px;
+        }
+
+        .sub-cate-list {
+            list-style: none;
+            padding-left: 0;
+            transition: height .4s ease-in-out;
+            overflow: hidden;
+        }
+
+        .ss-cate > span {
+            display: inline-block;
+            border: 1px solid green;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="addItem()">添加一个子列表li</button>
+        <button onclick="deleteItem()">删除一个子列表li</button>
+    </div>
+    <script src="./category.js"></script>
+    <script>
+        var config = { // 列表结构配置
+            name: 'cate',
+            className: 'cate',
+            cates: [{ // 当前分类
+                name: 'sub-cate-1', // 分类名
+                className: 'sub-cate', // 样式名
+                fn: call1, // 被点击时的回调
+                cates: [{ // 子分类
+                    name: 'ss-cate-i',
+                    className: 'ss-cate',
+                    fn: call4
+                }, { // 子分类
+                    name: 'ss-cate-ii',
+                    className: 'ss-cate',
+                    fn: call5
+                }, { // 子分类
+                    name: 'ss-cate-iii',
+                    className: 'ss-cate',
+                    fn: call6
+                }]
+            }, {
+                name: 'sub-cate-2',
+                className: 'sub-cate',
+                fn: call2, // 被点击时的回调
+            }, {
+                name: 'sub-cate-3',
+                className: 'sub-cate',
+                fn: call3, // 被点击时的回调
+            }],
+        }
+        // 创建列表
+        var cate = new Category(
+            document.querySelector('.container'), // 根节点
+            config
+        )
+
+        // dom节点刷新
+        function addItem () {
+            config.cates[0].cates.push({ // 子分类
+                name: '[by add]',
+                className: 'ss-cate',
+                fn: () => {
+                    console.log('hhhh')
+                }
+            })
+            cate.refresh()
+        }
+
+        function deleteItem () {
+            config.cates[0].cates.splice(-1)
+            cate.refresh()
+        }
+
+        function call1 () { console.log('click call1') }
+        function call2 () { console.log('click call2') }
+        function call3 () { console.log('click call3') }
+        function call4 () { console.log('click call4') }
+        function call5 () { console.log('click call5') }
+        function call6 () { console.log('click call6') }
+    </script>
+</body>
+</html>
