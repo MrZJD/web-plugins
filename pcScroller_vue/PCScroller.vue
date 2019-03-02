@@ -54,15 +54,6 @@ export default {
         }
     },
     mounted () {
-        this.boxSize = {
-            height: this.$refs.wrapper.scrollHeight,
-            clientHeight: this.$refs.wrapper.clientHeight,
-            h: this.$refs.wrapper.scrollHeight - this.$refs.wrapper.clientHeight,
-            top: 0,
-            ssTop: 0,
-            ssHeight: 60 // 默认滚动条高度
-        }
-
         this.init()
 
         document.body.addEventListener('mouseup', () => {
@@ -74,12 +65,25 @@ export default {
         })
     },
     methods: {
+        _resetBox () {
+            this.boxSize = {
+                height: this.$refs.wrapper.scrollHeight,
+                clientHeight: this.$refs.wrapper.clientHeight,
+                h: this.$refs.wrapper.scrollHeight - this.$refs.wrapper.clientHeight,
+                top: 0,
+                ssTop: 0,
+                ssHeight: 60 // 默认滚动条高度
+            }
+        },
+
         /**
          * @private
          * @method init
          * @desc 初始化
          */
         init () {
+            this._resetBox()
+
             this.isFF = typeof this.$refs.wrapper.onmousewheel === 'undefined' // firefox unsupport event 'onmousewheel'
 
             this._reset()
@@ -99,6 +103,11 @@ export default {
             this.$refs.wrapper.style.position = 'relative'
         },
 
+        _refreshH () {
+            this.boxSize.height = this.$refs.wrapper.scrollHeight
+            this.boxSize.clientHeight = this.$refs.wrapper.clientHeight
+        },
+
         /**
          * @private
          * @method _scroll
@@ -108,8 +117,9 @@ export default {
          */
         _scroll (evt) {
             // this.boxSize.top -= evt.wheelDeltaY
+            this._refreshH()
             let delta = -1
-            if (this._isFF) {
+            if (this.isFF) {
                 if (evt.detail > 0) {
                     delta = 1
                 }
@@ -173,6 +183,7 @@ export default {
         _refresh () {
             if (this.boxSize.clientHeight >= this.boxSize.height) {
                 this.$refs.ssThumb.style.display = 'none'
+                return
             } else {
                 this.$refs.ssThumb.style.display = 'block'
             }
@@ -198,7 +209,6 @@ export default {
 
             if (this.isFF) {
                 element.addEventListener('DOMMouseScroll', function (evt) {
-                    console.log(evt)
                     func.call(self, evt)
                 }, false)
             }
@@ -230,13 +240,11 @@ export default {
          */
         refreshDOM () {
             this.draging = false
-            this.boxSize.height = this.$refs.wrapper.scrollHeight
-            this.boxSize.clientHeight = this.$refs.wrapper.clientHeight
-            this.boxSize.h = this.$refs.wrapper.scrollHeight - this.$refs.wrapper.clientHeight
+            this._refreshH()
+
+            this.boxSize.h = this.$refs.wrapper.scrollHeight - this.$refs.wrapper.clientHeight || 1
 
             this.boxSize.ssTop = (this.boxSize.top / this.boxSize.h) * (this.$refs.ss.clientHeight - this.boxSize.ssHeight)
-
-            console.log('refreshDOM')
 
             this._refresh()
         }
@@ -258,5 +266,9 @@ export default {
     width: 100%;
     height: 46px;
     border-radius: 16px;
+}
+
+.scroller > * {
+    user-select: none;
 }
 </style>

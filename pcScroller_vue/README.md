@@ -22,3 +22,5 @@ PCScroller Component for vue
     }
 }
 ```
+
+update: fix some bugs
