@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Index</title>
+
+    <style>
+        html, body {
+            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+            margin: 0px;
+        }
+
+        pre, code {
+            margin: 0px;
+            font-family: inherit;
+            white-space: pre-line;
+        }
+
+        #app {
+            width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <pre>
+            <code>
+const {red, green, blue, _red, _green, _blue} = chalk
+console.chalk(red('RED'), _red('RED LABEL'))
+console.chalk(green('GREEN'), _green('GREEN LABEL'))
+console.chalk(blue('BLUE'), _blue('BLUE LABEL'))
+
+// 自定义样式
+chalk.defineStyle('badge', 'background-color: #005caf; color: #fff; border-radius: 2px; padding: 0px 4px;')
+console.chalk(chalk.badge('badge'))
+            </code>
+        </pre>
+    </div>
+    <script src="./chalk.js"></script>
+    <script src="./chalk.test.js"></script>
+</body>
+</html>
